@@ -1,0 +1,11 @@
+import { createApp } from "vue";
+import "./style.scss";
+import App from "./App.vue";
+import Directive from "./directive";
+import router from "./router";
+import UUID from "vue-uuid";
+const app = createApp(App);
+app.use(router);
+app.use(Directive);
+app.use(UUID);
+app.mount("#app");

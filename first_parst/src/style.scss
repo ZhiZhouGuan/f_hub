@@ -1,0 +1,140 @@
+/* http://meyerweb.com/eric/tools/css/reset/
+   v5.0.1 | 20191019
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, menu, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+main, menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, main, menu, nav, section {
+	display: block;
+}
+/* HTML5 hidden-attribute fix for newer browsers */
+*[hidden] {
+    display: none;
+}
+body {
+	line-height: 1;
+  	width: 100vw;
+  	height: 100vh;
+}
+#app {
+	width: 100vw;
+	height: 100vh;
+}
+menu, ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+
+a {
+	color: inherit;
+	text-decoration: none;
+}
+
+
+.hay-loading-parent--relative{ position: relative }
+.showMsg--fixd{ position: fixed; top: 0; left: 0;}
+
+
+
+
+
+//多端
+// 断点列表 相当于js中的数组，只不过这里数组用()表示
+$breakpoints: (
+  "phone": (
+    320px,
+    480px,
+  ),
+  "pad": (
+    481px,
+    768px,
+  ),
+  'phonePad':(
+    320px,
+    768px,
+  ),
+  "notebook": (
+    769px,
+    1024px,
+  ),
+  "pc": (
+    1025px,
+    1280px,
+  ),
+  // 大屏
+  "tv": 1281px,
+  //小导航
+  // "nav":(
+  //   320px,
+  //   1040px,
+  // )
+);
+// 混合
+@mixin respond-to($breakname) {
+  // map-get函数可以拿到上面定义的map数组中的值
+  $bp: map-get($breakpoints, $breakname);
+  // type-of用于判断上面的键是否是数组/列表类型
+  @if type-of($bp) == "list" {
+    $min: nth($bp, 1); // 拿到设备尺寸的最小值, 列表中的第一个值
+    $max: nth($bp, 2); // 拿到设备尺寸的最大值, 列表中的第二个值
+    // >= 最小值  and  <= 最大值
+    @media (min-width: $min) and (max-width: $max) {
+      // 类似于vue中的插槽，在此处挖一个坑，外面可以往里面传入不同的css样式
+      // 比如：下面代码示例中传入的是heigth的值
+      @content;
+    }
+  } @else {
+    @media (min-width: $bp) {
+      @content;
+    }
+  }
+}
+// 编写scss代码
+// .header {
+//   display: flex;
+//   width: 100%;
+//   background-color: pink;
+//   @include respond-to("phone") {
+//     height: 50px;
+//   }
+//   @include respond-to("pad") {
+//     height: 60px;
+//   }
+//   @include respond-to("notebook") {
+//     height: 80px;
+//   }
+//   @include respond-to("pc") {
+//     height: 100px;
+//   }
+//   @include respond-to("tv") {
+//     height: 200px;
+//   }
+// }
